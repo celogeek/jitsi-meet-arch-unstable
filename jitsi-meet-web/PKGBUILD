@@ -1,8 +1,7 @@
 _basename=jitsi-meet
 _pkgname=web
-_tag_version=4627
-_tag=${_basename}_${_tag_version}
-_version=1.0.4127
+_tag=4249
+_version=1.0.4249
 
 pkgname=${_basename}-${_pkgname}
 pkgver=${_version}
@@ -24,7 +23,7 @@ backup=(
   "etc/webapps/${pkgname}/interface_config.js"
 )
 source=(
-        "$pkgname-$pkgver.tar.gz::https://github.com/jitsi/jitsi-meet/archive/stable/${_tag}.tar.gz"
+        "$pkgname-$pkgver.tar.gz::https://github.com/jitsi/jitsi-meet/archive/${_tag}.tar.gz"
 )
 noextract=(
     "$pkgname-$pkgver.tar.gz"
@@ -74,4 +73,4 @@ package() {
         
         chown -R root:root "${pkgdir}"
 }
-sha256sums=('0c4a44205cf8e646d2423bfbff2e368128c31ccf1420bf622e25e915d52ed0e6')
+sha256sums=('6fad37db2ee81d485efd5a5b6ecf25b82bc6b5e2e128573c41d38899f905d52e')

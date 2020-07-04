@@ -2,12 +2,17 @@
 
 set -e
 
-curl -s https://api.github.com/repos/jitsi/jitsi-meet/releases/latest > RELEASE
+cd debian
+git checkout master
+git pull
 
-JITSI_MEET_VERSION=$(jq -r ".tag_name[18:]" RELEASE)
-JITSI_MEET_WEB_VERSION=$(jq -r .name RELEASE)
-JITSI_VIDEOBRIDGE=$(curl -s https://api.github.com/repos/jitsi/jitsi-videobridge/releases/latest | jq -r .name | tr '-' '+')
-JICOFO=$(curl -s https://api.github.com/repos/jitsi/jicofo/releases/latest | jq -r .name | tr '-' '+')
+JITSI_MEET_VERSION=$(git describe | sed 's/jitsi-meet_//')
+JITSI_MEET_WEB_VERSION=$(cat jitsi-meet-web)
+JITSI_VIDEOBRIDGE=$(cat jitsi-videobridge)
+JITSI_VIDEOBRIDGE_VERSION=$(cat jitsi-videobridge | tr '-' '+')
+JICOFO=$(cat jicofo)
+
+cd ..
 
 cat << __EOF__
 JITSI_MEET_VERSION=$JITSI_MEET_VERSION
@@ -17,18 +22,23 @@ JICOFO=$JICOFO
 __EOF__
 
 
-sed -i "s@^_tag_version=.*@_tag_version=$JITSI_MEET_VERSION@; s@pkgrel=.*@pkgrel=1@" */PKGBUILD
+sed -i "s@^_tag_version=.*@_tag_version=$JITSI_MEET_VERSION@" jitsi-meet/PKGBUILD
 sed -i "s@^_version=.*@_version=2.0.$JITSI_MEET_VERSION@" jitsi-meet/PKGBUILD
-sed -i "s@^_version=.*@_version=$JITSI_MEET_WEB_VERSION@" jitsi-meet-web/PKGBUILD
-sed -i "s@^_version=.*@_version=$JITSI_MEET_WEB_VERSION@" jitsi-meet-prosody/PKGBUILD
-sed -i "s@^_version=.*@_version=$JITSI_MEET_WEB_VERSION@" jitsi-meet-turnserver/PKGBUILD
-sed -i "s@^_version=.*@_version=$JITSI_VIDEOBRIDGE@" jitsi-videobridge/PKGBUILD
-sed -i "s@^_version=.*@_version=$JICOFO@" jicofo/PKGBUILD
 
+sed -i "s@^_tag=.*@_tag=$JITSI_MEET_WEB_VERSION@" jitsi-meet-{web,prosody,turnserver}/PKGBUILD
+sed -i "s@^_version=.*@_version=1.0.$JITSI_MEET_WEB_VERSION@" jitsi-meet-{web,prosody,turnserver}/PKGBUILD
+
+sed -i "s@^_tag=.*@_tag=$JITSI_VIDEOBRIDGE@" jitsi-videobridge/PKGBUILD
+sed -i "s@^_version=.*@_version=$JITSI_VIDEOBRIDGE_VERSION@" jitsi-videobridge/PKGBUILD
+
+sed -i "s@^_tag=.*@_tag=$JICOFO@" jicofo/PKGBUILD
+sed -i "s@^_version=.*@_version=1.0+$JICOFO@" jicofo/PKGBUILD
 
 for i in */PKGBUILD
 do
 	cd "$(dirname "$i")"
+	pwd
+	rm -f *.part
 	updpkgsums
 	makepkg --printsrcinfo > .SRCINFO
 	cd ..
