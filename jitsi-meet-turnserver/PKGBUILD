@@ -1,7 +1,7 @@
 _basename=jitsi-meet
 _pkgname=turnserver
-_tag=4249
-_version=1.0.4249
+_tag=4253
+_version=1.0.4253
 
 pkgname=${_basename}-${_pkgname}
 pkgver=${_version}
@@ -35,4 +35,4 @@ package() {
 	cd "$srcdir/$pkgname-$pkgver"
 	install -Dm644 -t "${pkgdir}/usr/share/doc/${pkgname}" doc/debian/jitsi-meet-turn/turnserver.conf doc/debian/jitsi-meet/jitsi-meet.conf doc/debian/jitsi-meet-turn/coturn-certbot-deploy.sh
 }
-sha256sums=('6fad37db2ee81d485efd5a5b6ecf25b82bc6b5e2e128573c41d38899f905d52e')
+sha256sums=('e01ced5c18a58ff36634fc932e912192d7e3890f795b42e7504a3f7869371ebe')
