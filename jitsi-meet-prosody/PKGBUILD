@@ -1,7 +1,7 @@
 _basename=jitsi-meet
 _pkgname=prosody
-_tag=4253
-_version=1.0.4253
+_tag=4265
+_version=1.0.4265
 
 pkgname=${_basename}-${_pkgname}
 pkgver=${_version}
@@ -18,21 +18,12 @@ options=('!strip')
 backup=(
 )
 source=(
-        "$pkgname-$pkgver.tar.gz::https://github.com/jitsi/jitsi-meet/archive/${_tag}.tar.gz"
-)
-noextract=(
-    "$pkgname-$pkgver.tar.gz"
+        "$pkgname::git+https://github.com/jitsi/jitsi-meet#tag=${_tag}"
 )
 groups=('jitsi-meet', 'celogeek')
 
-prepare() {
-  [ -d "$pkgname-$pkgver" ] && return 0
-  mkdir "$pkgname-$pkgver"
-  tar xzf "$pkgname-$pkgver.tar.gz" --strip 1 -C "$pkgname-$pkgver"
-}
-
 package() {
-        cd "$srcdir/$pkgname-$pkgver"
+        cd "$srcdir/$pkgname"
 
         install -Dm644 -t "${pkgdir}/usr/share/doc/${pkgname}" doc/debian/jitsi-meet-prosody/prosody.cfg.lua-jvb.example 
         sed -i 's@/usr/share/jitsi-meet/prosody-plugins/@/usr/lib/jitsi-meet-prosody@' "${pkgdir}/usr/share/doc/${pkgname}/prosody.cfg.lua-jvb.example"
@@ -40,4 +31,4 @@ package() {
         install -d "${pkgdir}/usr/lib"
         cp -Rv "resources/prosody-plugins" "${pkgdir}/usr/lib/${pkgname}"
 }
-sha256sums=('e01ced5c18a58ff36634fc932e912192d7e3890f795b42e7504a3f7869371ebe')
+sha256sums=('SKIP')

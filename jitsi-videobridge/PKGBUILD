@@ -1,7 +1,7 @@
 _basename=jitsi
 _pkgname=videobridge
-_tag=2.1-268-g3fd089a4
-_version=2.1+268+g3fd089a4
+_tag=2.1-271-ge33f5b67
+_version=2.1+271+ge33f5b67
 
 pkgname=${_basename}-${_pkgname}
 pkgver=${_version}
@@ -24,33 +24,24 @@ backup=(
   "etc/${pkgname}/sip-communicator.properties"
 )
 source=(
-        "$pkgname-$pkgver.tar.gz::https://github.com/jitsi/${pkgname}/archive/${_tag}.tar.gz"
+        "$pkgname::git+https://github.com/jitsi/jitsi-videobridge#tag=${_tag}"
         "config"
         "sip-communicator.properties"
         "service"
         "sysusers.conf"
         "tmpfiles.conf"
 )
-noextract=(
-    "$pkgname-$pkgver.tar.gz"
-)
 groups=('jitsi-meet', 'celogeek')
 
-prepare() {
-  [ -d "$pkgname-$pkgver" ] && return 0
-  mkdir "$pkgname-$pkgver"
-  tar xzf "$pkgname-$pkgver.tar.gz" --strip 1 -C "$pkgname-$pkgver"
-}
-
 build() {
-        cd "$pkgname-$pkgver"
+        cd "$pkgname"
         mvn clean
         mvn package -DskipTests -Dassembly.skipAssembly=true install
         mvn dependency:copy-dependencies -DincludeScope=runtime
 }
 
 package() {
-	cd "$srcdir/$pkgname-$pkgver"
+	cd "$srcdir/$pkgname"
 
         DESTDIR="${pkgdir}/usr/lib/${pkgname}"
         CONFDIR="${pkgdir}/etc/${pkgname}"
@@ -71,7 +62,7 @@ package() {
         install -Dm644 "sysusers.conf" "${pkgdir}/usr/lib/sysusers.d/$pkgname.conf"
         install -Dm644 "tmpfiles.conf" "${pkgdir}/usr/lib/tmpfiles.d/$pkgname.conf"
 }
-sha256sums=('7ae1c8bc3d17ad5640427b0d708870a32defbe64b040febe42efcd2897474dcd'
+sha256sums=('SKIP'
             '5c79dc1e1f5ee04eba3da987c488fc53cb6e4348345cab05ab0ed6d7000f3d9d'
             'cc9fbf77497bce3c9673b2d144928f11cdd0c0823940c2b60c8369a2f086b9b7'
             '1e128b74c791d184f4634ce5eaed6f7f367642e7ba6f513da1387132841ed3de'

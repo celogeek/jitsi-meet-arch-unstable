@@ -22,7 +22,7 @@ backup=(
   "etc/${pkgname}/sip-communicator.properties"
 )
 source=(
-        "$pkgname-$pkgver.tar.gz::https://github.com/jitsi/${pkgname}/archive/${_tag}.tar.gz"
+        "$pkgname::git+https://github.com/jitsi/jicofo#tag=${_tag}"
         "config"
         "sip-communicator.properties"
         "service"
@@ -30,25 +30,16 @@ source=(
         "tmpfiles.conf"
 )
 groups=('jitsi-meet', 'celogeek')
-noextract=(
-        "$pkgname-$pkgver.tar.gz"
-)
-
-prepare() {
-  [ -d "$pkgname-$pkgver" ] && return 0
-  mkdir "$pkgname-$pkgver"
-  tar xzf "$pkgname-$pkgver.tar.gz" --strip 1 -C "$pkgname-$pkgver"
-}
 
 build() {
-        cd "$pkgname-$pkgver"
+        cd "$pkgname"
         mvn clean
         mvn package -DskipTests -Dassembly.skipAssembly=true
         mvn dependency:copy-dependencies -DincludeScope=runtime
 }
 
 package() {
-        cd "$srcdir/$pkgname-$pkgver"
+        cd "$srcdir/$pkgname"
         
         DESTDIR="${pkgdir}/usr/lib/${pkgname}"
         CONFDIR="${pkgdir}/etc/${pkgname}"
@@ -67,7 +58,7 @@ package() {
         install -Dm644 "sysusers.conf" "${pkgdir}/usr/lib/sysusers.d/$pkgname.conf"
         install -Dm644 "tmpfiles.conf" "${pkgdir}/usr/lib/tmpfiles.d/$pkgname.conf"
 }
-sha256sums=('fef256412cf33b2931ad46226a020e4d1629886730876feac65edffc266b16c4'
+sha256sums=('SKIP'
             '537d93f8f8e046c536139f0a75acdf86e2f2bf35d562a012e26a0bcfe6446eaa'
             'f295f5f8ee13edd019defc037c60e04c6ea2d30e69cc4a896c010b8570f5efab'
             '0fd4da92b61bf6299d414f660159fa9ce47caf3b002f75fda82f18ee0e594695'
