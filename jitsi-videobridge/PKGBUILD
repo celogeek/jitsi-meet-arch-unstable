@@ -1,7 +1,7 @@
 _basename=jitsi
 _pkgname=videobridge
-_tag=2.1-272-g4390f610
-_version=2.1+272+g4390f610
+_tag=2.1-274-g9bbf2713
+_version=2.1+274+g9bbf2713
 
 pkgname=${_basename}-${_pkgname}
 pkgver=${_version}
@@ -46,12 +46,17 @@ package() {
         DESTDIR="${pkgdir}/usr/lib/${pkgname}"
         CONFDIR="${pkgdir}/etc/${pkgname}"
 
-        install -Dm644 -t "${DESTDIR}/lib" target/dependency/* lib/videobridge.rc
-        install -Dm644 target/${pkgname}*.jar "${DESTDIR}/${pkgname}.jar"
-        install -Dm755 -t "${DESTDIR}" "resources/jvb.sh"
+        install -Dm644 -C -t "${DESTDIR}/lib" \
+		jvb/target/dependency/* \
+                jvb-api/jvb-api-client/target/dependency/* \
+		jvb-api/jvb-api-common/target/dependency/* \
+		jvb/lib/videobridge.rc
+
+        install -Dm644 jvb/target/${pkgname}*.jar "${DESTDIR}/${pkgname}.jar"
+        install -Dm755 -t "${DESTDIR}" "jvb/resources/jvb.sh"
 
 	install -dm750 "${CONFDIR}"
-        install -Dm640 -t "${CONFDIR}" "lib/logging.properties" "config/log4j2.xml" "config/callstats-java-sdk.properties"
+        install -Dm640 -t "${CONFDIR}" "jvb/lib/logging.properties" "config/log4j2.xml" "config/callstats-java-sdk.properties"
 	sed -i 's@logs@/var/log/jitsi-videobridge@' "${CONFDIR}/log4j2.xml"
 
 	install -Dm644 "config/20-jvb-udp-buffers.conf" "${pkgdir}/etc/sysctl.d/${pkgname}.conf"
