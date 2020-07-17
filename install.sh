@@ -11,7 +11,6 @@ fi
 for i in jicofo jitsi-meet-prosody jitsi-meet-turnserver jitsi-meet-web jitsi-videobridge jitsi-meet
 do
 	cd "$i"
-	rm -f *.part
 	makepkg -si --needed --noconfirm
 	cd -
 done
