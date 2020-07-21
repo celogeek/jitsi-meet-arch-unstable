@@ -1,6 +1,6 @@
 _basename=jicofo
-_tag=612
-_version=1.0+612
+_tag=613
+_version=1.0+613
 
 pkgname=${_basename}
 pkgver=${_version}
