@@ -12,6 +12,7 @@ StateDirectoryMode=0750
 LogsDirectory=jitsi-videobridge
 LogsDirectoryMode=0750
 Restart=on-failure
+RestartSec=2
 SuccessExitStatus=143
 
 # more threads for this process

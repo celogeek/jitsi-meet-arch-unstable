@@ -1,6 +1,6 @@
 pkgbase = jicofo
 	pkgdesc = Jicofo
-	pkgver = 1.0+613
+	pkgver = 1.0+624
 	pkgrel = 1
 	url = https://jitsi.org/jitsi-meet/
 	arch = any
@@ -17,7 +17,7 @@ pkgbase = jicofo
 	backup = etc/jicofo/config
 	backup = etc/jicofo/logging.properties
 	backup = etc/jicofo/sip-communicator.properties
-	source = jicofo::git+https://github.com/jitsi/jicofo#tag=613
+	source = jicofo::git+https://github.com/jitsi/jicofo#tag=624
 	source = config
 	source = sip-communicator.properties
 	source = service

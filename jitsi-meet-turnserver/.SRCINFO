@@ -1,6 +1,6 @@
 pkgbase = jitsi-meet-turnserver
 	pkgdesc = Jitsi Meet Prosody Plugins
-	pkgver = 1.0.4310
+	pkgver = 1.0.4368
 	pkgrel = 1
 	url = https://jitsi.org/jitsi-meet/
 	arch = any
@@ -9,7 +9,7 @@ pkgbase = jitsi-meet-turnserver
 	license = Apache
 	optdepends = coturn
 	options = !strip
-	source = jitsi-meet-turnserver::git+https://github.com/jitsi/jitsi-meet#tag=4310
+	source = jitsi-meet-turnserver::git+https://github.com/jitsi/jitsi-meet#tag=4368
 	sha256sums = SKIP
 
 pkgname = jitsi-meet-turnserver
