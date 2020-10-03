@@ -10,4 +10,4 @@ Also, the stable branch is available here:
 
 I also provided directly on arch the nightly build or binary:
 
-[Jitsi Meet Nightly on AUR](https://aur.archlinux.org/packages/?O=0&SeB=nd&K=jitsi+nightly&outdated=&SB=n&SO=a&PP=50&do_Search=Go)
+[Jitsi Meet Nightly on AUR](https://aur.archlinux.org/packages/?K=celogeek&SeB=m)
