@@ -2,6 +2,14 @@
 
 set -e
 
+cat <<__EOF__
+This package is deprecated.
+I now maintain the package on AUR, so use this one instead.
+
+Take a look at the "From AUR" section. And pick the stable version.
+__EOF__
+exit
+
 cd debian
 git checkout master
 git pull

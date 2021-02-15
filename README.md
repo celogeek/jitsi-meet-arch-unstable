@@ -1,13 +1,8 @@
-# Installation Guide
+# Deprecated
 
-Look at my blog for a complete guide on how to install jitsi on Arch Linux:
+This package is deprecated.
 
-[Jitsi Meet on Arch Linux](https://blog.celogeek.com/posts/linux/archlinux/2020-06-jitsi-meet-on-arch-linux/)
+I maintain the binaries packages on AUR: [Jitsi Meet Nightly Binary on AUR](https://aur.archlinux.org/packages/?K=celogeek&SeB=m)
 
-Also, the stable branch is available here:
+For a full guide, step by step, installation, you can follow my blog post here: [Jitsi Meet Nighly on Arch Linux](https://blog.celogeek.com/posts/linux/archlinux/2021-02-jitsi-meet-nighly-on-arch-linux/)
 
-[Jitsi Meet Stable](https://github.com/celogeek/jitsi-meet-arch)
-
-I also provided directly on arch the nightly build or binary:
-
-[Jitsi Meet Nightly on AUR](https://aur.archlinux.org/packages/?K=celogeek&SeB=m)
